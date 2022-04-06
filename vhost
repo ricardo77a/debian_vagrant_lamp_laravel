@@ -1,0 +1,22 @@
+chown -R www-data.www-data /var/www/html/proyecto
+chmod -R 755 /var/www/html/proyecto
+chmod -R 777 /var/www/html/proyecto/storage
+mv .env.example .env
+php artisan key:generate
+sudo nano /etc/apache2/sites-available/proyecto.test.conf
+
+<VirtualHost *:80>
+	ServerAdmin email@email.com
+	ServerName proyecto.test
+	DocumentRoot /var/www/html/proyecto/public
+	<Directory /var/www/html/proyecto>
+	    Options Indexes FollowSymLinks
+	    AllowOverride All
+	    Require all granted
+	</Directory>
+</VirtualHost>
+
+
+sudo ln -s /etc/apache2/sites-available/proyecto.test.conf /etc/apache2/sites-enabled/proyecto.test.conf
+
+sudo systemctl restart apache2
