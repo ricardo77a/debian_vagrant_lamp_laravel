@@ -20,3 +20,7 @@ sudo nano /etc/apache2/sites-available/proyecto.test.conf
 sudo ln -s /etc/apache2/sites-available/proyecto.test.conf /etc/apache2/sites-enabled/proyecto.test.conf
 
 sudo systemctl restart apache2
+
+a2dissite 000-default
+a2ensite proyecto.test.conf
+
